@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
+import Colors from '../../theme/colors';
 
 const Card = props => {
   return (
@@ -18,7 +19,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.26,
     // Elevation prop only works on Android
     elevation: 10,
-    backgroundColor: '#FFF',
+    backgroundColor: Colors.white,
     padding: 20,
     borderRadius: 10,
   }
