@@ -26,8 +26,12 @@ const GameScreen = props => {
       <Text>Computer's Guess:</Text>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card style={styles.buttonContainer}>
-        <Button title='LOWER' color={Colors.secondary} onPress={() => {}}/>
-        <Button title='GREATER' color={Colors.primary} onPress={() => {}}/>
+        <View style={styles.button}>
+          <Button title='LOWER' color={Colors.secondary} onPress={() => {}}/>
+        </View>
+        <View style={styles.button}>
+          <Button title='GREATER' color={Colors.primary} onPress={() => {}}/>
+        </View>
       </Card>
     </View>
   );
@@ -44,6 +48,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     marginTop: 20,
     width: '80%',
+  },
+  button: {
+    width: '40%',
   },
 });
 
