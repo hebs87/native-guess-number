@@ -6,11 +6,29 @@ import Input from "../../components/Input/Input";
 
 const StartGameScreen = props => {
   const [enteredValue, setEnteredValue] = useState('');
+  const [confirmed, setConfirmed] = useState(false);
+  const [selectedNumber, setSelectedNumber] = useState('');
 
   const handleInputChange = inputText => {
     // Replace any non-number char with empty string
     let validatedInputText = inputText.replace(/[^0-9]/g, '');
     setEnteredValue(validatedInputText);
+  };
+
+  const handleReset = () => {
+    setEnteredValue('');
+    setConfirmed(false);
+    setSelectedNumber('');
+  };
+
+  const handleConfirm = () => {
+    const inputNum = parseInt(enteredValue);
+    if (isNaN(inputNum) || inputNum <= 0 || inputNum > 99) {
+      return;
+    }
+    setConfirmed(true);
+    setSelectedNumber(inputNum);
+    setEnteredValue('');
   };
 
   return (
@@ -31,13 +49,17 @@ const StartGameScreen = props => {
           />
           <View style={styles.buttonContainer}>
             <View style={styles.button}>
-              <Button title='Reset' color={Colors.secondary} onPress={() => {}}/>
+              <Button title='Reset' color={Colors.secondary} onPress={handleReset}/>
             </View>
             <View style={styles.button}>
-              <Button title='Confirm' color={Colors.primary} onPress={() => {}}/>
+              <Button title='Confirm' color={Colors.primary} onPress={handleConfirm}/>
             </View>
           </View>
         </Card>
+        {
+          confirmed &&
+          <Text>Selected number: {selectedNumber}</Text>
+        }
       </View>
     </TouchableWithoutFeedback>
   );
