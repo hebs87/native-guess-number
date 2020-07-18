@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {StyleSheet, View, Text, Button} from 'react-native';
+import React, {useState, useRef} from 'react';
+import {StyleSheet, View, Text, Button, Alert} from 'react-native';
 import NumberContainer from "../../components/NumberContainer/NumberContainer";
 import Card from "../../components/Card/Card";
 import Colors from '../../theme/colors';
@@ -19,7 +19,25 @@ const generateRandomNum = (min, max, exclude) => {
 };
 
 const GameScreen = props => {
-  const [currentGuess, setCurrentGuess] = useState(generateRandomNum(1, 100, props.userChoice));
+  const [currentGuess, setCurrentGuess] = useState(generateRandomNum(1, 100, props.selectedNumber));
+  const currentLow = useRef(1);
+  const currentHigh = useRef(100);
+
+  const generateNextGuess = direction => {
+    if ((direction === 'lower' && currentGuess <= props.selectedNumber) ||
+      (direction === 'greater' && currentGuess >= props.selectedNumber)
+    ) {
+      Alert.alert(
+        'Don\'t lie!',
+        'You know that this is wrong...',
+        [{text: 'Sorry', style: 'cancel'}]
+      );
+      return;
+    }
+    direction === 'lower' ? currentHigh.current = currentGuess : currentLow.current = currentGuess;
+    const nextNum = generateRandomNum(currentLow.current, currentHigh.current, currentGuess);
+    setCurrentGuess(nextNum);
+  };
 
   return (
     <View style={styles.screen}>
@@ -27,10 +45,18 @@ const GameScreen = props => {
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card style={styles.buttonContainer}>
         <View style={styles.button}>
-          <Button title='LOWER' color={Colors.secondary} onPress={() => {}}/>
+          <Button
+            title='LOWER'
+            color={Colors.secondary}
+            onPress={() => generateNextGuess('lower')}
+          />
         </View>
         <View style={styles.button}>
-          <Button title='GREATER' color={Colors.primary} onPress={() => {}}/>
+          <Button
+            title='GREATER'
+            color={Colors.primary}
+            onPress={() => generateNextGuess('greater')}
+          />
         </View>
       </Card>
     </View>
