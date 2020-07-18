@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, Button} from 'react-native';
+import NumberContainer from "../../components/NumberContainer/NumberContainer";
+import Card from "../../components/Card/Card";
+import Colors from '../../theme/colors';
 
 const generateRandomNum = (min, max, exclude) => {
   // Round up any non-int value
@@ -19,14 +22,29 @@ const GameScreen = props => {
   const [currentGuess, setCurrentGuess] = useState(generateRandomNum(1, 100, props.userChoice));
 
   return (
-    <View>
-
+    <View style={styles.screen}>
+      <Text>Computer's Guess:</Text>
+      <NumberContainer>{currentGuess}</NumberContainer>
+      <Card style={styles.buttonContainer}>
+        <Button title='LOWER' color={Colors.secondary} onPress={() => {}}/>
+        <Button title='GREATER' color={Colors.primary} onPress={() => {}}/>
+      </Card>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-
+  screen: {
+    flex: 1,
+    padding: 10,
+    alignItems: 'center',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 20,
+    width: '80%',
+  },
 });
 
 export default GameScreen;
