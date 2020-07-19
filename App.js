@@ -9,6 +9,11 @@ export default function App() {
   const [selectedNumber, setSelectedNumber] = useState('');
   const [totalRounds, setTotalRounds] = useState(0);
 
+  const handleNewGame = () => {
+    setSelectedNumber(null);
+    setTotalRounds(0);
+  };
+
   const handleStartGame = selectedNumber => {
     setSelectedNumber(selectedNumber);
     setTotalRounds(0);
@@ -23,7 +28,7 @@ export default function App() {
   if (selectedNumber && totalRounds <= 0) {
     content = <GameScreen selectedNumber={selectedNumber} handleGameOver={handleGameOver}/>;
   } else if (totalRounds > 0) {
-    content = <GameOverScreen/>;
+    content = <GameOverScreen totalRounds={totalRounds} selectedNumber={selectedNumber} handleNewGame={handleNewGame}/>;
   }
 
   return (
