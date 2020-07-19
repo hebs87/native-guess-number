@@ -47,7 +47,6 @@ const GameScreen = props => {
     const nextNum = generateRandomNum(currentLow.current, currentHigh.current, currentGuess);
     setCurrentGuess(nextNum);
     setTotalRounds(currentRounds => currentRounds + 1);
-    console.log(totalRounds);
   };
 
   return (
