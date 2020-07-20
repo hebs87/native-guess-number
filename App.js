@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
+import * as Font from 'expo-font';
 import Header from "./components/Header/Header";
 import StartGameScreen from "./screens/StartGameScreen/StartGameScreen";
 import GameScreen from "./screens/GameScreen/GameScreen";
