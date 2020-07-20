@@ -1,12 +1,14 @@
 import React from 'react';
-import {StyleSheet, View, Button} from 'react-native';
+import {StyleSheet, View, Button, Image} from 'react-native';
 import TitleText from "../../components/TitleText/TitleText";
 import BodyText from "../../components/BodyText/BodyText";
+import Success from '../../assets/images/success.png';
 
 const GameOverScreen = props => {
   return (
     <View style={styles.screen}>
-      <TitleText>Game Over!</TitleText>
+      <TitleText style={styles.title}>Game Over!</TitleText>
+      <Image source={Success}/>
       <BodyText>Number of rounds:</BodyText>
       <BodyText>{props.totalRounds}</BodyText>
       <BodyText>The number was:</BodyText>
@@ -21,6 +23,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  title: {
+    fontSize: 20,
   },
 });
 
