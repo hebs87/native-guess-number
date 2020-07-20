@@ -3,7 +3,9 @@ import {StyleSheet, View, Button, Alert} from 'react-native';
 import BodyText from "../../components/BodyText/BodyText";
 import NumberContainer from "../../components/NumberContainer/NumberContainer";
 import Card from "../../components/Card/Card";
+import MainButton from "../../components/MainButton/MainButton";
 import Colors from '../../theme/colors';
+import {Ionicons} from '@expo/vector-icons';
 
 const generateRandomNum = (min, max, exclude) => {
   // Round up any non-int value
@@ -55,20 +57,17 @@ const GameScreen = props => {
       <BodyText>Computer's Guess:</BodyText>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card style={styles.buttonContainer}>
-        <View style={styles.button}>
-          <Button
-            title='LOWER'
-            color={Colors.secondary}
-            onPress={() => generateNextGuess('lower')}
-          />
-        </View>
-        <View style={styles.button}>
-          <Button
-            title='GREATER'
-            color={Colors.primary}
-            onPress={() => generateNextGuess('greater')}
-          />
-        </View>
+        <MainButton
+          style={styles.lowerButton}
+          onPress={() => generateNextGuess('lower')}
+        >
+          <Ionicons name='md-remove' size={24} color='white'/>
+        </MainButton>
+        <MainButton
+          onPress={() => generateNextGuess('greater')}
+        >
+          <Ionicons name='md-add' size={24} color='white'/>
+        </MainButton>
       </Card>
     </View>
   );
@@ -86,8 +85,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
     width: '80%',
   },
-  button: {
-    width: '40%',
+  lowerButton: {
+    backgroundColor: Colors.secondary,
   },
 });
 
