@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Button, Image} from 'react-native';
+import Colors from '../../theme/colors';
 import TitleText from "../../components/TitleText/TitleText";
 import BodyText from "../../components/BodyText/BodyText";
 import Success from '../../assets/images/success.png';
@@ -8,12 +9,23 @@ const GameOverScreen = props => {
   return (
     <View style={styles.screen}>
       <TitleText style={styles.title}>Game Over!</TitleText>
-      <Image source={Success}/>
+      <View style={styles.imageContainer}>
+        <Image
+          fadeDuration={300}
+          source={Success}
+          style={styles.image}
+          resizeMode='cover'
+        />
+      </View>
       <BodyText>Number of rounds:</BodyText>
       <BodyText>{props.totalRounds}</BodyText>
       <BodyText>The number was:</BodyText>
       <BodyText>{props.selectedNumber}</BodyText>
-      <Button title="NEW GAME" onPress={props.handleNewGame}/>
+      <Button
+        title="NEW GAME"
+        color={Colors.primary}
+        onPress={props.handleNewGame}
+      />
     </View>
   );
 };
@@ -26,6 +38,19 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
+  },
+  imageContainer: {
+    width: 300,
+    height: 300,
+    borderRadius: 150,
+    borderWidth: 2,
+    borderColor: Colors.black,
+    overflow: 'hidden',
+    marginVertical: 30,
+  },
+  image: {
+    width: '100%',
+    height: '100%',
   },
 });
 
