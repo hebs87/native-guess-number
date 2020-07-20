@@ -1,5 +1,6 @@
 import React, {useState, useRef, useEffect} from 'react';
-import {StyleSheet, View, Text, Button, Alert} from 'react-native';
+import {StyleSheet, View, Button, Alert} from 'react-native';
+import BodyText from "../../components/BodyText/BodyText";
 import NumberContainer from "../../components/NumberContainer/NumberContainer";
 import Card from "../../components/Card/Card";
 import Colors from '../../theme/colors';
@@ -51,7 +52,7 @@ const GameScreen = props => {
 
   return (
     <View style={styles.screen}>
-      <Text>Computer's Guess:</Text>
+      <BodyText>Computer's Guess:</BodyText>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card style={styles.buttonContainer}>
         <View style={styles.button}>

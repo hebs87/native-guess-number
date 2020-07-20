@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, Button, TouchableWithoutFeedback, Keyboard, Alert} from 'react-native';
+import {StyleSheet, View, Button, TouchableWithoutFeedback, Keyboard, Alert} from 'react-native';
+import TitleText from "../../components/TitleText/TitleText";
+import BodyText from "../../components/BodyText/BodyText";
 import Colors from "../../theme/colors";
 import Card from "../../components/Card/Card";
 import Input from "../../components/Input/Input";
@@ -41,9 +43,9 @@ const StartGameScreen = props => {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.screen}>
-        <Text style={styles.title}>Start a New Game!</Text>
+        <TitleText style={styles.title}>Start a New Game!</TitleText>
         <Card style={styles.inputContainer}>
-          <Text>Select a Number</Text>
+          <BodyText>Select a Number</BodyText>
           <Input
             style={styles.input}
             blurOnSubmit
@@ -66,7 +68,7 @@ const StartGameScreen = props => {
         {
           confirmed &&
           <Card style={styles.summaryContainer}>
-            <Text>You selected</Text>
+            <BodyText>You selected:</BodyText>
             <NumberContainer>{selectedNumber}</NumberContainer>
             <Button
               title='START GAME'
@@ -89,7 +91,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     marginVertical: 10,
-    fontFamily: 'OpenSansBold',
   },
   inputContainer: {
     width: 300,
