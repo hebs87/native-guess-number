@@ -3,6 +3,7 @@ import {StyleSheet, View, Button, Image} from 'react-native';
 import Colors from '../../theme/colors';
 import TitleText from "../../components/TitleText/TitleText";
 import BodyText from "../../components/BodyText/BodyText";
+import MainButton from "../../components/MainButton/MainButton";
 import Success from '../../assets/images/success.png';
 
 const GameOverScreen = props => {
@@ -26,11 +27,11 @@ const GameOverScreen = props => {
           !
         </BodyText>
       </View>
-      <Button
-        title="NEW GAME"
-        color={Colors.primary}
+      <MainButton
         onPress={props.handleNewGame}
-      />
+      >
+        NEW GAME
+      </MainButton>
     </View>
   );
 };
