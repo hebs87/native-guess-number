@@ -17,10 +17,15 @@ const GameOverScreen = props => {
           resizeMode='cover'
         />
       </View>
-      <BodyText>Number of rounds:</BodyText>
-      <BodyText>{props.totalRounds}</BodyText>
-      <BodyText>The number was:</BodyText>
-      <BodyText>{props.selectedNumber}</BodyText>
+      <View style={styles.resultContainer}>
+        <BodyText style={styles.resultText}>
+          Your phone needed
+          <BodyText style={styles.highlight}> {props.totalRounds} </BodyText>
+          rounds to guess the number
+          <BodyText style={styles.highlight}> {props.selectedNumber}</BodyText>
+          !
+        </BodyText>
+      </View>
       <Button
         title="NEW GAME"
         color={Colors.primary}
@@ -51,6 +56,18 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
+  },
+  resultContainer: {
+    marginHorizontal: 30,
+    marginBottom: 15,
+  },
+  resultText: {
+    textAlign: 'center',
+  },
+  highlight: {
+    color: Colors.primary,
+    fontFamily: 'OpenSansBold',
+    fontSize: 20
   },
 });
 
