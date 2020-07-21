@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, Image, ScrollView, Dimensions} from 'react-native';
 import Colors from '../../theme/colors';
 import TitleText from "../../components/TitleText/TitleText";
@@ -7,11 +7,31 @@ import MainButton from "../../components/MainButton/MainButton";
 import Success from '../../assets/images/success.png';
 
 const GameOverScreen = props => {
+  const [windowWidth, setWindowWidth] = useState(Dimensions.get('window').width);
+  const [windowHeight, setWindowHeight] = useState(Dimensions.get('window').height);
+
+  useEffect(() => {
+    const updateLayout = () => {
+      setWindowWidth(Dimensions.get('window').width);
+      setWindowHeight(Dimensions.get('window').height);
+    };
+    Dimensions.addEventListener('change', updateLayout);
+    return () => Dimensions.removeEventListener('change', updateLayout);
+  });
+
   return (
     <ScrollView>
       <View style={styles.screen}>
         <TitleText style={styles.title}>Game Over!</TitleText>
-        <View style={styles.imageContainer}>
+        <View
+          style={{
+            width: windowWidth * 0.7,
+            height: windowWidth * 0.7,
+            borderRadius: (windowWidth * 0.7) / 2,
+            marginVertical: windowHeight / 30,
+            ...styles.imageContainer
+          }}
+        >
           <Image
             fadeDuration={300}
             source={Success}
@@ -19,12 +39,31 @@ const GameOverScreen = props => {
             resizeMode='cover'
           />
         </View>
-        <View style={styles.resultContainer}>
+        <View
+          style={{
+            marginBottom: windowHeight / 60,
+            ...styles.resultContainer
+          }}
+        >
           <BodyText style={styles.resultText}>
             Your phone needed
-            <BodyText style={styles.highlight}> {props.totalRounds} </BodyText>
-            rounds to guess the number
-            <BodyText style={styles.highlight}> {props.selectedNumber}</BodyText>
+            <BodyText
+              style={{
+                fontSize: windowHeight < 400 ? 16 : 20,
+                ...styles.highlight
+              }}
+            >
+               {props.totalRounds}
+            </BodyText>
+             rounds to guess the number
+            <BodyText
+              style={{
+                fontSize: windowHeight < 400 ? 16 : 20,
+                ...styles.highlight
+              }}
+            >
+               {props.selectedNumber}
+            </BodyText>
             !
           </BodyText>
         </View>
@@ -43,18 +82,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingVertical: 10,
   },
   title: {
     fontSize: 20,
   },
   imageContainer: {
-    width: Dimensions.get('window').width * 0.7,
-    height: Dimensions.get('window').width * 0.7,
-    borderRadius: Dimensions.get('window').width * 0.7 / 2,
     borderWidth: 2,
     borderColor: Colors.black,
     overflow: 'hidden',
-    marginVertical: Dimensions.get('window').height / 30,
   },
   image: {
     width: '100%',
@@ -62,7 +98,6 @@ const styles = StyleSheet.create({
   },
   resultContainer: {
     marginHorizontal: 30,
-    marginBottom: Dimensions.get('window').height / 60,
   },
   resultText: {
     textAlign: 'center',
@@ -70,7 +105,6 @@ const styles = StyleSheet.create({
   highlight: {
     color: Colors.primary,
     fontFamily: 'OpenSansBold',
-    fontSize: Dimensions.get('window').height < 400 ? 16 : 20,
   },
 });
 
