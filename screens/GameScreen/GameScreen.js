@@ -25,6 +25,7 @@ const GameScreen = props => {
   const initialGuess = generateRandomNum(1, 100, props.selectedNumber);
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
   const [pastGuesses, setPastGuesses] = useState([initialGuess]);
+  const [windowWidth, setWindowWidth] = useState(Dimensions.get('window').width);
   const [windowHeight, setWindowHeight] = useState(Dimensions.get('window').height);
   const currentLow = useRef(1);
   const currentHigh = useRef(100);
@@ -33,6 +34,7 @@ const GameScreen = props => {
 
   useEffect(() => {
     const updateLayout = () => {
+      setWindowWidth(Dimensions.get('window').width);
       setWindowHeight(Dimensions.get('window').height);
     };
     Dimensions.addEventListener('change', updateLayout);
@@ -64,7 +66,13 @@ const GameScreen = props => {
   };
 
   const renderGuessList = (value, roundNum) => (
-    <View key={value} style={styles.listItem}>
+    <View
+      key={value}
+      style={{
+        width: windowWidth > 350 ? '60%' : '80%',
+        ...styles.listItem
+      }}
+    >
       <BodyText>#{roundNum}</BodyText>
       <BodyText>{value}</BodyText>
     </View>
@@ -92,7 +100,12 @@ const GameScreen = props => {
         ) : (
           <>
             <NumberContainer>{currentGuess}</NumberContainer>
-            <Card style={styles.buttonContainer}>
+            <Card
+              style={{
+                marginTop: windowHeight > 600 ? 20 : 5,
+                ...styles.buttonContainer
+              }}
+            >
               <MainButton
                 style={styles.lowerButton}
                 onPress={() => generateNextGuess('lower')}
@@ -132,7 +145,6 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop: Dimensions.get('window').height > 600 ? 20 : 5,
     width: '80%',
   },
   lowerButton: {
@@ -157,7 +169,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: Dimensions.get('window').width > 350 ? '60%' : '80%',
   },
 });
 

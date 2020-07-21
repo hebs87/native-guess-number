@@ -52,18 +52,14 @@ const GameOverScreen = props => {
                 fontSize: windowHeight < 400 ? 16 : 20,
                 ...styles.highlight
               }}
-            >
-               {props.totalRounds}
-            </BodyText>
+            > {props.totalRounds} </BodyText>
              rounds to guess the number
             <BodyText
               style={{
                 fontSize: windowHeight < 400 ? 16 : 20,
                 ...styles.highlight
               }}
-            >
-               {props.selectedNumber}
-            </BodyText>
+            > {props.selectedNumber}</BodyText>
             !
           </BodyText>
         </View>
