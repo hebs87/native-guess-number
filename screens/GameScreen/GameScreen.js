@@ -54,6 +54,13 @@ const GameScreen = props => {
     setPastGuesses(currPastGuesses => [nextNum, ...currPastGuesses]);
   };
 
+  const renderGuessList = (value, roundNum) => (
+    <View key={value} style={styles.listItem}>
+      <BodyText>#{roundNum}</BodyText>
+      <BodyText>{value}</BodyText>
+    </View>
+  )
+
   return (
     <View style={styles.screen}>
       <BodyText>Computer's Guess:</BodyText>
@@ -71,13 +78,11 @@ const GameScreen = props => {
           <Ionicons name='md-add' size={24} color='white'/>
         </MainButton>
       </Card>
-      <ScrollView>
-        {pastGuesses.map(guess => (
-          <View key={guess}>
-            <BodyText>{guess}</BodyText>
-          </View>
-        ))}
-      </ScrollView>
+      <View style={styles.list}>
+        <ScrollView>
+          {pastGuesses.map((guess, idx) => renderGuessList(guess, pastGuesses.length - idx))}
+        </ScrollView>
+      </View>
     </View>
   );
 };
@@ -96,6 +101,20 @@ const styles = StyleSheet.create({
   },
   lowerButton: {
     backgroundColor: Colors.secondary,
+  },
+  list: {
+    width: '80%',
+    // This is needed to make the nested ScrollView scrollable in Android
+    flex: 1,
+  },
+  listItem: {
+    borderColor: Colors.black,
+    borderWidth: 1,
+    padding: 15,
+    marginVertical: 10,
+    backgroundColor: Colors.white,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });
 
