@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -22,6 +22,18 @@ const StartGameScreen = props => {
   const [enteredValue, setEnteredValue] = useState('');
   const [confirmed, setConfirmed] = useState(false);
   const [selectedNumber, setSelectedNumber] = useState('');
+  const [buttonWidth, setButtonWidth] = useState(Dimensions.get('window').width / 4);
+
+  useEffect(() => {
+    // Function to set the desired style value
+    const updateLayout = () => {
+      setButtonWidth(Dimensions.get('window').width / 4);
+    };
+    // Event listener to call the above function when the device is rotated
+    Dimensions.addEventListener('change', updateLayout);
+    // Clean up function to remove the event listener once the action is completed - avoid memory leaks
+    return () => Dimensions.removeEventListener('change', updateLayout);
+  });
 
   const handleInputChange = inputText => {
     // Replace any non-number char with empty string
@@ -70,10 +82,10 @@ const StartGameScreen = props => {
                 value={enteredValue}
               />
               <View style={styles.buttonContainer}>
-                <View style={styles.button}>
+                <View style={{width: buttonWidth}}>
                   <Button title='Reset' color={Colors.secondary} onPress={handleReset}/>
                 </View>
-                <View style={styles.button}>
+                <View style={{width: buttonWidth}}>
                   <Button title='Confirm' color={Colors.primary} onPress={handleConfirm}/>
                 </View>
               </View>
@@ -123,9 +135,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 15,
   },
-  button: {
-    width: Dimensions.get('window').width / 4,
-  },
+  // button: {
+  //   width: Dimensions.get('window').width / 4,
+  // },
   summaryContainer: {
     marginTop: 20,
     alignItems: 'center',
