@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Button, TouchableWithoutFeedback, Keyboard, Alert} from 'react-native';
+import {StyleSheet, View, Button, TouchableWithoutFeedback, Keyboard, Alert, Dimensions} from 'react-native';
 import Colors from "../../theme/colors";
 import TitleText from "../../components/TitleText/TitleText";
 import BodyText from "../../components/BodyText/BodyText";
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   button: {
-    width: '40%',
+    width: Dimensions.get('window').width / 4,
   },
   summaryContainer: {
     marginTop: 20,
