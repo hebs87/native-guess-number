@@ -5,7 +5,15 @@ import Colors from '../../theme/colors';
 
 const Header = props => {
   return (
-    <View style={styles.header}>
+    <View
+      style={{
+        ...styles.headerBase,
+        ...Platform.select({
+          ios: styles.headerIOS,
+          android: styles.headerAndroid,
+        })
+      }}
+    >
       <TitleText style={styles.headerTitle}>
         {props.title}
       </TitleText>
@@ -14,14 +22,19 @@ const Header = props => {
 };
 
 const styles = StyleSheet.create({
-  header: {
+  headerBase: {
     width: '100%',
     height: 90,
-    backgroundColor: Platform.OS === 'android' ? Colors.primary : Colors.white,
     alignItems: 'center',
     justifyContent: 'center',
-    borderBottomColor: Platform.OS === 'ios' ? Colors.grey : 'transparent',
-    borderBottomWidth: Platform.OS === 'ios' ? 1 : 0,
+  },
+  headerIOS: {
+    backgroundColor: Colors.white,
+    borderBottomColor: Colors.grey,
+    borderBottomWidth: 1,
+  },
+  headerAndroid: {
+    backgroundColor: Colors.primary,
   },
   headerTitle: {
     color: Platform.OS === 'ios' ? Colors.primary : Colors.white,
