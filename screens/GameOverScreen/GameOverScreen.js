@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     borderWidth: 2,
-    borderColor: Colors.black,
+    borderColor: Colors.grey,
     overflow: 'hidden',
   },
   image: {
